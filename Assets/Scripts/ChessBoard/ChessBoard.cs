@@ -8,6 +8,7 @@ public class ChessBoard : MonoBehaviour
     public Square[,] squares = new Square[8, 8];
     public GameObject squarePrefab;
     public Material[] squareMaterials = new Material[2];
+    public Material accessSquareMaterial;
 
     [Header("ChessBoard Variables")]
     public Piece selectedPiece;
@@ -39,7 +40,40 @@ public class ChessBoard : MonoBehaviour
     {
         selectedPiece = piece;
 
-        //Check if null
+        if (piece != null)
+        {
+            EnableAccesability(piece);
+        }
+        else
+        {
+            DisableAccesability();
+        }
+    }
+
+    public void EnableAccesability(Piece piece)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            //XREN
+            Square square = squares[(int)piece.position.x, (int)piece.position.y + i];
+            square.isAccessible = true;
+
+            SetSquareAccessMaterial(square);
+        }
+    }
+
+    public void DisableAccesability()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                Square square = squares[i, j];
+                square.isAccessible = false;
+
+                SetSquareBirthMaterial(square);
+            }
+        }
     }
 
     public void SetSquares()
@@ -53,20 +87,43 @@ public class ChessBoard : MonoBehaviour
 
                 Square square = Instantiate(squarePrefab, new Vector3(jPos, 0.55f, iPos), transform.rotation, transform).GetComponent<Square>();
 
-                if ((i % 2 != 0 && j % 2 != 0) || (i % 2 == 0 && j % 2 == 0))
-                {
-                    square.GetComponent<Renderer>().material = squareMaterials[0];
-                }
-                else
-                {
-                    square.GetComponent<Renderer>().material = squareMaterials[1];
-                }
+                InitSquareMaterial(square, i, j);
 
-                square.xCor = j;
-                square.yCor = i;
+                square.position = new Vector2(j, i);
 
-                squares[i, j] = square;
+                squares[j, i] = square;
             }
         }
+    }
+
+    /// <summary>
+    /// Initializes birth material to squares.
+    /// </summary>
+    private void InitSquareMaterial(Square square, int i, int j)
+    {
+        if ((i % 2 != 0 && j % 2 != 0) || (i % 2 == 0 && j % 2 == 0))
+        {
+            Material material = squareMaterials[0];
+
+            square.GetComponent<Renderer>().material = material;
+            square.squareMaterial = material;
+        }
+        else
+        {
+            Material material = squareMaterials[1];
+
+            square.GetComponent<Renderer>().material = material;
+            square.squareMaterial = material;
+        }
+    }
+
+    private void SetSquareAccessMaterial(Square square)
+    {
+        square.GetComponent<Renderer>().material = accessSquareMaterial;
+    }
+
+    private void SetSquareBirthMaterial(Square square)
+    {
+        square.GetComponent<Renderer>().material = square.squareMaterial;
     }
 }

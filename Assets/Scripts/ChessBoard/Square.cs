@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Square : MonoBehaviour
 {
-    public int xCor;
-    public int yCor;
+    public Vector2 position;
 
     public bool isAccessible;
-
     public Piece currentPiece;
+
+    public Material squareMaterial;
 
     public void OnMouseDown()
     {
@@ -21,6 +21,8 @@ public class Square : MonoBehaviour
 
     public void SetPiecePosition(Piece piece)
     {
-        piece.Move(transform.position);
+        //change to float
+        piece.Move(this);
+        currentPiece = piece;
     }
 }

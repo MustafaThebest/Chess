@@ -4,26 +4,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Piece : MonoBehaviour
-{ 
+{
     public bool isSelected;
 
-    public int xPos;
-    public int yPos;
+    public Vector2 position;
 
     public static Action<Piece> OnSelect;
 
     public void OnMouseDown()
     {
-        isSelected = !isSelected;
+        Select(!isSelected);
+    }
 
-        if(isSelected)
+    public void Move(Square square)
+    {
+        position = square.position;
+        transform.position = new Vector3(square.transform.position.x, 1, square.transform.position.z);
+
+        //set new position
+
+        Select(false);
+        Debug.Log("transfered!");
+    }
+
+    public void Select(bool isSelected)
+    {
+        this.isSelected = isSelected;
+        
+        if (isSelected)
         {
             OnSelect?.Invoke(this);
-        } else
+        }
+        else
         {
             OnSelect?.Invoke(null);
         }
     }
-
-    public abstract void Move(Vector3 position);
 }

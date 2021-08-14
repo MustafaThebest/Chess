@@ -552,3 +552,5 @@ MonoBehaviour:
   squareMaterials:
   - {fileID: 2100000, guid: ae89dee963e3b2a46a8836db8fee9d16, type: 2}
   - {fileID: 2100000, guid: 7dfcb3cd29559f149aa88ed17c85c64d, type: 2}
+  accessSquareMaterial: {fileID: 2100000, guid: 05737e5ccce570048a87f35bb722b75e, type: 2}
+  selectedPiece: {fileID: 0}
