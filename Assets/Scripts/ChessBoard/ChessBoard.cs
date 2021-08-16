@@ -52,14 +52,9 @@ public class ChessBoard : MonoBehaviour
 
     public void EnableAccesability(Piece piece)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            //XREN
-            Square square = squares[(int)piece.position.x, (int)piece.position.y + i];
-            square.isAccessible = true;
+        DisableAccesability();
 
-            SetSquareAccessMaterial(square);
-        }
+        SetSquareAccessMaterial(piece.ShowPath(squares));
     }
 
     public void DisableAccesability()
@@ -117,6 +112,14 @@ public class ChessBoard : MonoBehaviour
         }
     }
 
+    private void SetSquareAccessMaterial(List<Square> squares)
+    {
+        for (int i = 0; i < squares.Count; i++)
+        {
+            squares[i].GetComponent<Renderer>().material = accessSquareMaterial;
+        }
+    }
+
     private void SetSquareAccessMaterial(Square square)
     {
         square.GetComponent<Renderer>().material = accessSquareMaterial;
@@ -125,5 +128,13 @@ public class ChessBoard : MonoBehaviour
     private void SetSquareBirthMaterial(Square square)
     {
         square.GetComponent<Renderer>().material = square.squareMaterial;
+    }
+
+    public void DiselectPieces()
+    {
+        foreach (var item in FindObjectsOfType<Piece>())
+        {
+            item.isSelected = false;
+        }
     }
 }

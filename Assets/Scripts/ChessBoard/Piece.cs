@@ -10,9 +10,12 @@ public abstract class Piece : MonoBehaviour
     public Vector2 position;
 
     public static Action<Piece> OnSelect;
+    public Action OnMove;
 
     public void OnMouseDown()
     {
+        ChessBoard.Instance.DiselectPieces();
+
         Select(!isSelected);
     }
 
@@ -21,16 +24,31 @@ public abstract class Piece : MonoBehaviour
         position = square.position;
         transform.position = new Vector3(square.transform.position.x, 1, square.transform.position.z);
 
-        //set new position
+        //To detect piece move
+        OnMove?.Invoke();
 
         Select(false);
-        Debug.Log("transfered!");
+    }
+
+    public abstract List<Square> ShowPath(Square[,] squares);
+
+    public Square SetAccessToSquare(int x, int y, Square[,] squares)
+    {
+        Square square = squares[(int)position.x + x, (int)position.y + y];
+        if(square.currentPiece == null)
+        {
+            square.isAccessible = true;
+            return square;
+        }
+        return null;
     }
 
     public void Select(bool isSelected)
     {
         this.isSelected = isSelected;
-        
+
+        print("select");
+
         if (isSelected)
         {
             OnSelect?.Invoke(this);

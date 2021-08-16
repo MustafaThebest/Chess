@@ -15,14 +15,21 @@ public class Square : MonoBehaviour
     {
         if(isAccessible)
         {
-            SetPiecePosition(ChessBoard.Instance.selectedPiece);
+            SetPiece(ChessBoard.Instance.selectedPiece);
         }
     }
 
-    public void SetPiecePosition(Piece piece)
+    public void SetPiece(Piece piece)
     {
         //change to float
         piece.Move(this);
+        piece.OnMove += RemovePiece;
+        
         currentPiece = piece;
+    }
+
+    public void RemovePiece()
+    {
+        currentPiece = null;
     }
 }
