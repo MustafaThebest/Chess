@@ -276,10 +276,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawnPrefab: {fileID: 279524445962429857, guid: 741eb00d94ab7bc43a98f50d18771f97, type: 3}
-  rookPrefab: {fileID: 0}
-  knightPrefab: {fileID: 0}
-  queenPrefab: {fileID: 0}
-  kingPrefab: {fileID: 0}
+  rookPrefab: {fileID: 9046219502822760750, guid: 486573681de9b2548968d65dae8edd62, type: 3}
+  knightPrefab: {fileID: 3005935231608316677, guid: 80a099a3e4f9ff141aba5359f4dd7e3f, type: 3}
+  bishopPrefab: {fileID: 3002099087888438371, guid: 3d302533411111f4b8c14bd25e269752, type: 3}
+  queenPrefab: {fileID: 3867639871209432250, guid: e0a6e0a9e4ac43941a216f6c9ff5bc26, type: 3}
+  kingPrefab: {fileID: 191153757438472200, guid: 81912f78b4575f24f9786723362fab4f, type: 3}
 --- !u!4 &956974773
 Transform:
   m_ObjectHideFlags: 0
@@ -370,13 +371,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.49999967, y: -0, z: -0, w: 0.8660256}
-  m_LocalPosition: {x: 0, y: 10.306028, z: -5.7368627}
+  m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
+  m_LocalPosition: {x: 0, y: 9, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
 --- !u!1 &1288688109
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +391,6 @@ GameObject:
   - component: {fileID: 1288688111}
   - component: {fileID: 1288688110}
   - component: {fileID: 1288688114}
-  - component: {fileID: 1288688115}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -492,20 +492,3 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7dfcb3cd29559f149aa88ed17c85c64d, type: 2}
   accessSquareMaterial: {fileID: 2100000, guid: 05737e5ccce570048a87f35bb722b75e, type: 2}
   selectedPiece: {fileID: 0}
---- !u!114 &1288688115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288688109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b042f8e5e066cf644bfeb4bda100ec57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawnPrefab: {fileID: 279524445962429857, guid: 741eb00d94ab7bc43a98f50d18771f97, type: 3}
-  rookPrefab: {fileID: 0}
-  knightPrefab: {fileID: 0}
-  queenPrefab: {fileID: 0}
-  kingPrefab: {fileID: 0}

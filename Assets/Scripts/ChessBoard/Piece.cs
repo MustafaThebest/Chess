@@ -47,8 +47,6 @@ public abstract class Piece : MonoBehaviour
     {
         this.isSelected = isSelected;
 
-        print("select");
-
         if (isSelected)
         {
             OnSelect?.Invoke(this);
