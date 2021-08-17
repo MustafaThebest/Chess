@@ -54,7 +54,7 @@ public class Knight : Piece
                 squaresToAccess.Add(square);
             }
         }
-        if (position.x - y >= 0 && position.y + x <= 7)
+        if (position.y - y >= 0 && position.x + x <= 7)
         {
             Square square = SetAccessToSquare(-y, x, squares);
             if (square != null)
@@ -62,7 +62,7 @@ public class Knight : Piece
                 squaresToAccess.Add(square);
             }
         }
-        if (position.x + y <= 7 && position.y - x >= 0)
+        if (position.y + y <= 7 && position.x - x >= 0)
         {
             Square square = SetAccessToSquare(y, -x, squares);
             if (square != null)
@@ -78,6 +78,7 @@ public class Knight : Piece
                 squaresToAccess.Add(square);
             }
         }
+
 
         return squaresToAccess;
     }
