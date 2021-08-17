@@ -35,7 +35,8 @@ public abstract class Piece : MonoBehaviour
     public Square SetAccessToSquare(int x, int y, Square[,] squares)
     {
         Square square = squares[(int)position.x + x, (int)position.y + y];
-        if(square.currentPiece == null)
+        print(((int)position.x + x) + " " + ((int)position.y + y));
+        if (square.currentPiece == null)
         {
             square.isAccessible = true;
             return square;
