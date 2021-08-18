@@ -16,6 +16,10 @@ public class Bishop : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -32,6 +36,10 @@ public class Bishop : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -48,6 +56,10 @@ public class Bishop : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -63,6 +75,10 @@ public class Bishop : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {

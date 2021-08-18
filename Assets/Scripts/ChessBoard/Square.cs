@@ -7,6 +7,7 @@ public class Square : MonoBehaviour
     public Vector2 position;
 
     public bool isAccessible;
+    public bool isAttackable;
     public Piece currentPiece;
 
     public Material squareMaterial;
@@ -21,7 +22,6 @@ public class Square : MonoBehaviour
 
     public void SetPiece(Piece piece)
     {
-        //change to float
         piece.Move(this);
         piece.OnMove += RemovePiece;
         

@@ -16,6 +16,10 @@ public class King : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -32,6 +36,10 @@ public class King : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -48,6 +56,10 @@ public class King : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -63,6 +75,10 @@ public class King : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -77,7 +93,11 @@ public class King : Piece
                 Square square = SetAccessToSquare(0, i, squares);
                 if (square != null)
                 {
-                    squaresToAccess.Add(square);
+                    squaresToAccess.Add(square); 
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -92,7 +112,11 @@ public class King : Piece
                 Square square = SetAccessToSquare(i, 0, squares);
                 if (square != null)
                 {
-                    squaresToAccess.Add(square);
+                    squaresToAccess.Add(square); 
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -108,7 +132,11 @@ public class King : Piece
                 Square square = SetAccessToSquare(0, -i, squares);
                 if (square != null)
                 {
-                    squaresToAccess.Add(square);
+                    squaresToAccess.Add(square); 
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -124,7 +152,11 @@ public class King : Piece
                 Square square = SetAccessToSquare(-i, 0, squares);
                 if (square != null)
                 {
-                    squaresToAccess.Add(square);
+                    squaresToAccess.Add(square); 
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {

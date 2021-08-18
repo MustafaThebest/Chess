@@ -5,26 +5,145 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
+    public int turnsCount = 3;
+
+    public void Start()
+    {
+        turnsCount = 3;
+    }
+
     public override List<Square> ShowPath(Square[,] squares)
     {
         List<Square> squaresToAccess = new List<Square>();
 
-        for (int i = 1; i < 3; i++)
+        if (!isBlack)
         {
-            if(position.y + i <= 7 && position.x <= 7)
+            for (int i = 1; i < turnsCount; i++)
             {
-                Square square = SetAccessToSquare(0, i, squares);
+                if (position.y + i <= 7 && position.x <= 7)
+                {
+                    Square square = GetSquareInfo(0, i, squares);
+                    if (square != null)
+                    {
+
+                        if (square.currentPiece != null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            square.isAccessible = true;
+                            squaresToAccess.Add(square);
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (position.x + 1 <= 7 && position.y + 1 <= 7)
+            {
+                Square square = GetSquareInfo(1, 1, squares);
                 if (square != null)
                 {
-                    squaresToAccess.Add(square);
+                    if(square.currentPiece != null)
+                    {
+                        square.isAccessible = true;
+                        squaresToAccess.Add(square);
+                    }
                 }
-                else
+            }
+
+            if (position.x - 1 >= 0 && position.y + 1 <= 7)
+            {
+                Square square = GetSquareInfo(-1, 1, squares);
+                if (square != null)
                 {
-                    break;
+                    if (square.currentPiece != null)
+                    {
+                        square.isAccessible = true;
+                        squaresToAccess.Add(square);
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            for (int i = 1; i < turnsCount; i++)
+            {
+                if (position.y - i >= 0 && position.x <= 7)
+                {
+                    Square square = GetSquareInfo(0, -i, squares);
+                    if (square != null)
+                    {
+                        if (square.currentPiece != null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            square.isAccessible = true;
+                            squaresToAccess.Add(square);
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (position.x - 1 >= 0 && position.y - 1 >= 0)
+            {
+                Square square = GetSquareInfo(-1, -1, squares);
+                if (square != null)
+                {
+                    if (square.currentPiece != null)
+                    {
+                        square.isAccessible = true;
+                        squaresToAccess.Add(square);
+                    }
+                }
+            }
+
+            if (position.x + 1 <= 7 && position.y - 1 >= 0)
+            {
+                Square square = GetSquareInfo(1, -1, squares);
+                if (square != null)
+                {
+                    if (square.currentPiece != null)
+                    {
+                        square.isAccessible = true;
+                        squaresToAccess.Add(square);
+                    }
                 }
             }
         }
 
         return squaresToAccess;
+    }
+
+    public Square GetSquareInfo(int x, int y, Square[,] squares)
+    {
+        Square square = squares[(int)position.x + x, (int)position.y + y];
+        //print(((int)position.x + x) + " " + ((int)position.y + y));
+        if (square.currentPiece == null)
+        {
+            return square;
+        }
+        else
+        {
+            if (square.currentPiece.isBlack != isBlack)
+            {
+                return square;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

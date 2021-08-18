@@ -11,17 +11,71 @@ public class Knight : Piece
         int x = 1;
         int y = 2;
 
-        for (int i = 0; i < y; i++)
+        //Top-Down
+        if (position.x + x <= 7 && position.y + y <= 7)
         {
-            for (int j = 0; j < x; j++)
+            Square square = SetAccessToSquare(x, y, squares);
+            if (square != null)
             {
-                if(SetAccessToSquare(j, i, squares) != null)
-                {
-                    Square square = SetAccessToSquare(j, i, squares);
-                
-                    squaresToAccess.Add(square);
-                }
+                squaresToAccess.Add(square);
+            }
+        }
+        if (position.x - x >= 0 && position.y + y <= 7)
+        {
+            Square square = SetAccessToSquare(-x, y, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
+            }
+        }
+        if (position.x + x <= 7 && position.y - y >= 0)
+        {
+            Square square = SetAccessToSquare(x, -y, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
+            }
+        }
+        if (position.x - x >= 0 && position.y - y >= 0)
+        {
+            Square square = SetAccessToSquare(-x, -y, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
+            }
+        }
 
+        //Right-Left
+        if (position.y + x <= 7 && position.x + y <= 7)
+        {
+            Square square = SetAccessToSquare(y, x, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
+            }
+        }
+        if (position.x - y >= 0 && position.y + x <= 7)
+        {
+            Square square = SetAccessToSquare(-y, x, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
+            }
+        }
+        if (position.x + y <= 7 && position.y - x >= 0)
+        {
+            Square square = SetAccessToSquare(y, -x, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
+            }
+        }
+        if (position.y - x >= 0 && position.x - y >= 0)
+        {
+            Square square = SetAccessToSquare(-y, -x, squares);
+            if (square != null)
+            {
+                squaresToAccess.Add(square);
             }
         }
 

@@ -16,6 +16,10 @@ public class Rook : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -31,6 +35,10 @@ public class Rook : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -47,6 +55,10 @@ public class Rook : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -63,6 +75,10 @@ public class Rook : Piece
                 if (square != null)
                 {
                     squaresToAccess.Add(square);
+                    if (square.currentPiece != null)
+                    {
+                        break;
+                    }
                 }
                 else
                 {

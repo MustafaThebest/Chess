@@ -9,23 +9,51 @@ public abstract class Piece : MonoBehaviour
 
     public Vector2 position;
 
+    public bool isBlack;
+
     public static Action<Piece> OnSelect;
     public Action OnMove;
+    public static Action OnTurn;
+
+    public void Start()
+    {
+        //GameManager.OnTeamChange += ChangeAccessState;
+    }
+
+    public void OnDisable()
+    {
+        //GameManager.OnTeamChange -= ChangeAccessState;
+    }
+
+    private void Update()
+    {
+        ChangeAccessState();
+    }
 
     public void OnMouseDown()
     {
-        ChessBoard.Instance.DiselectPieces();
+        if (GameManager.Instance.isBlackTurn == isBlack)
+        {
+            ChessBoard.Instance.DiselectPieces();
 
-        Select(!isSelected);
+            Select(!isSelected);
+        }
     }
 
     public void Move(Square square)
     {
         position = square.position;
+
+        if (square.currentPiece != null)
+        {
+            Destroy(square.currentPiece.gameObject);
+        }
+
         transform.position = new Vector3(square.transform.position.x, 1, square.transform.position.z);
 
         //To detect piece move
         OnMove?.Invoke();
+        OnTurn?.Invoke();
 
         Select(false);
     }
@@ -35,13 +63,25 @@ public abstract class Piece : MonoBehaviour
     public Square SetAccessToSquare(int x, int y, Square[,] squares)
     {
         Square square = squares[(int)position.x + x, (int)position.y + y];
-        print(((int)position.x + x) + " " + ((int)position.y + y));
+        //print(((int)position.x + x) + " " + ((int)position.y + y));
         if (square.currentPiece == null)
         {
             square.isAccessible = true;
             return square;
         }
-        return null;
+        else
+        {
+            if (square.currentPiece.isBlack != isBlack)
+            {
+                square.isAccessible = true;
+                return square;
+            }
+            else
+            {
+                square.isAccessible = false;
+                return null;
+            }
+        }
     }
 
     public void Select(bool isSelected)
@@ -57,4 +97,16 @@ public abstract class Piece : MonoBehaviour
             OnSelect?.Invoke(null);
         }
     }
+
+    public void ChangeAccessState()
+    {
+        if(GameManager.Instance.isBlackTurn == isBlack)
+        {
+            GetComponent<BoxCollider>().enabled = true;
+        } else
+        {
+            GetComponent<BoxCollider>().enabled = false;
+        }
+    }
 }
+

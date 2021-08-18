@@ -18,51 +18,128 @@ public class ChessSpawner : MonoBehaviour
 
     public void SpawnPieces()
     {
-        SpawnPawns(1);
-        SpawnRooks(0);
-        SpawnKnights(0);
-        SpawnBishops(0);
-        SpawnRoyal(0);
+        SpawnTeam(true);
+        SpawnTeam(false);
     }
 
-    public void SpawnPawns(int row)
+    public void SpawnTeam(bool isBlack)
     {
-        for (int i = 0; i < 8; i++)
+        SpawnBishops(isBlack);
+        SpawnRooks(isBlack);
+        SpawnKnights(isBlack);
+        SpawnRoyal(isBlack);
+        SpawnPawns(isBlack);
+    }
+
+    public void SpawnPawns(bool isBlack)
+    {
+        if (isBlack)
         {
-            Pawn pawn = Instantiate(pawnPrefab);
-            ChessBoard.Instance.squares[i, row].SetPiece(pawn);
+            for (int i = 0; i < 8; i++)
+            {
+                Pawn pawn = Instantiate(pawnPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+                pawn.GetComponent<Renderer>().material.color = Color.black;
+                pawn.isBlack = true;
+                ChessBoard.Instance.squares[i, 6].SetPiece(pawn);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Pawn pawn = Instantiate(pawnPrefab);
+                ChessBoard.Instance.squares[i, 1].SetPiece(pawn);
+            }
         }
     }
 
-    public void SpawnRooks(int row)
+    public void SpawnRooks(bool isBlack)
     {
-        Rook rook1 = Instantiate(rookPrefab);
-        Rook rook2 = Instantiate(rookPrefab);
-        ChessBoard.Instance.squares[0, row].SetPiece(rook1);
-        ChessBoard.Instance.squares[7, row].SetPiece(rook2);
+        if (isBlack)
+        {
+
+            Rook rook1 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Rook rook2 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            ChessBoard.Instance.squares[0, 7].SetPiece(rook1);
+            ChessBoard.Instance.squares[7, 7].SetPiece(rook2);
+
+            MakeBlack(rook1, rook2);
+        }
+        else
+        {
+            Rook rook1 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Rook rook2 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            ChessBoard.Instance.squares[0, 0].SetPiece(rook1);
+            ChessBoard.Instance.squares[7, 0].SetPiece(rook2);
+        }
     }
 
-    public void SpawnKnights(int row)
+    public void SpawnKnights(bool isBlack)
     {
-        Knight knight1 = Instantiate(knightPrefab);
-        Knight knight2 = Instantiate(knightPrefab);
-        ChessBoard.Instance.squares[1, row].SetPiece(knight1);
-        ChessBoard.Instance.squares[6, row].SetPiece(knight2);
+        if (isBlack)
+        {
+            Knight knight1 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Knight knight2 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            ChessBoard.Instance.squares[1, 7].SetPiece(knight1);
+            ChessBoard.Instance.squares[6, 7].SetPiece(knight2);
+
+            MakeBlack(knight1, knight2);
+        }
+        else
+        {
+            Knight knight1 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Knight knight2 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            ChessBoard.Instance.squares[1, 0].SetPiece(knight1);
+            ChessBoard.Instance.squares[6, 0].SetPiece(knight2);
+        }
     }
 
-    public void SpawnBishops(int row)
+    public void SpawnBishops(bool isBlack)
     {
-        Bishop bishop1 = Instantiate(bishopPrefab);
-        Bishop bishop2 = Instantiate(bishopPrefab);
-        ChessBoard.Instance.squares[2, row].SetPiece(bishop1);
-        ChessBoard.Instance.squares[5, row].SetPiece(bishop2);
+        if (isBlack)
+        {
+            Bishop bishop1 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Bishop bishop2 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            ChessBoard.Instance.squares[2, 7].SetPiece(bishop1);
+            ChessBoard.Instance.squares[5, 7].SetPiece(bishop2);
+
+            MakeBlack(bishop1, bishop2);
+        }
+        else
+        {
+            Bishop bishop1 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Bishop bishop2 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            ChessBoard.Instance.squares[2, 0].SetPiece(bishop1);
+            ChessBoard.Instance.squares[5, 0].SetPiece(bishop2);
+        }
     }
 
-    public void SpawnRoyal(int row)
+    public void SpawnRoyal(bool isBlack)
     {
-        King bishop1 = Instantiate(kingPrefab);
-        Queen bishop2 = Instantiate(queenPrefab);
-        ChessBoard.Instance.squares[3, row].SetPiece(kingPrefab);
-        ChessBoard.Instance.squares[4, row].SetPiece(queenPrefab);
+        if (isBlack)
+        {
+            King king = Instantiate(kingPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Queen queen = Instantiate(queenPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            ChessBoard.Instance.squares[4, 7].SetPiece(king);
+            ChessBoard.Instance.squares[3, 7].SetPiece(queen);
+
+            MakeBlack(king, queen);
+        }
+        else
+        {
+            King king = Instantiate(kingPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Queen queen = Instantiate(queenPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            ChessBoard.Instance.squares[4, 0].SetPiece(king);
+            ChessBoard.Instance.squares[3, 0].SetPiece(queen);
+        }
+    }
+
+    public void MakeBlack(Piece piece1, Piece piece2)
+    {
+        piece1.GetComponent<Renderer>().material.color = Color.black;
+        piece2.GetComponent<Renderer>().material.color = Color.black;
+
+        piece1.isBlack = true;
+        piece2.isBlack = true;
     }
 }
