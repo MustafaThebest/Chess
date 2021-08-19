@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+    public static Action<bool> OnTeamChange;
 
-    //public static Action<bool> OnTeamChange;
+    public bool isChangeble;
 
     public void Awake()
     {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         isBlackTurn = false;
         Piece.OnTurn += ChangeTeam;
+        ChessSpawner.OnPiecesLoad += GetChangeAccess;
     }
 
     public void CreateInstance()
@@ -35,10 +37,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GetChangeAccess(bool isChangeble)
+    {
+        this.isChangeble = isChangeble;
+    }
+
     public void ChangeTeam()
     {
-        isBlackTurn = !isBlackTurn;
-        //OnTeamChange?.Invoke(isBlackTurn);
+        if(isChangeble)
+        {
+            isBlackTurn = !isBlackTurn;
+            OnTeamChange?.Invoke(isBlackTurn);
+        }
     }
 
 }

@@ -14,16 +14,7 @@ public abstract class Piece : MonoBehaviour
     public static Action<Piece> OnSelect;
     public Action OnMove;
     public static Action OnTurn;
-
-    public void Start()
-    {
-        //GameManager.OnTeamChange += ChangeAccessState;
-    }
-
-    public void OnDisable()
-    {
-        //GameManager.OnTeamChange -= ChangeAccessState;
-    }
+    public static Action<bool> OnKingDeath;
 
     private void Update()
     {
@@ -46,6 +37,11 @@ public abstract class Piece : MonoBehaviour
 
         if (square.currentPiece != null)
         {
+            if(square.currentPiece.GetComponent<King>())
+            {
+                OnKingDeath?.Invoke(isBlack);
+                return;
+            }
             Destroy(square.currentPiece.gameObject);
         }
 

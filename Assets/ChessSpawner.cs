@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,15 +12,74 @@ public class ChessSpawner : MonoBehaviour
     [SerializeField] private Queen queenPrefab;
     [SerializeField] private King kingPrefab;
 
+    public static ChessSpawner Instance;
+
+    public static Action<bool> OnPiecesLoad;
+
+    public void Awake()
+    {
+        CreateInstance();
+    }
+
     public void Start()
     {
         SpawnPieces();
+
+        Piece.OnKingDeath += ReloadGame;
+    }
+
+    public void CreateInstance()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void ReloadGame(bool isBlack)
+    {
+        OnPiecesLoad?.Invoke(false);
+
+        if (isBlack)
+        {
+            print("Black won!");
+        }
+        else
+        {
+            print("White won!");
+        }
+
+        ClearPieces();
+        SpawnPieces();
+
+        Piece.OnKingDeath += ReloadGame;
     }
 
     public void SpawnPieces()
     {
         SpawnTeam(true);
         SpawnTeam(false);
+
+        OnPiecesLoad?.Invoke(true);
+    }
+
+    public void ClearPieces()
+    {
+        Piece.OnKingDeath -= ReloadGame;
+
+        foreach (var item in FindObjectsOfType<Square>())
+        {
+            item.currentPiece = null;
+        }
+
+        foreach (var item in FindObjectsOfType<Piece>())
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     public void SpawnTeam(bool isBlack)
