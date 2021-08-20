@@ -11,8 +11,10 @@ public abstract class Piece : MonoBehaviour
 
     public bool isBlack;
 
+    public int pieceValue;
+
     public static Action<Piece> OnSelect;
-    public Action OnMove;
+    public Action<Piece> OnMove;
     public static Action OnTurn;
     public static Action<bool> OnKingDeath;
 
@@ -48,7 +50,7 @@ public abstract class Piece : MonoBehaviour
         transform.position = new Vector3(square.transform.position.x, 1, square.transform.position.z);
 
         //To detect piece move
-        OnMove?.Invoke();
+        OnMove?.Invoke(this);
         OnTurn?.Invoke();
 
         Select(false);

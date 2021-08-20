@@ -97,7 +97,7 @@ public class ChessSpawner : MonoBehaviour
         {
             for (int i = 0; i < 8; i++)
             {
-                Pawn pawn = Instantiate(pawnPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+                Pawn pawn = Instantiate(pawnPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
                 pawn.GetComponent<Renderer>().material.color = Color.black;
                 pawn.isBlack = true;
                 ChessBoard.Instance.squares[i, 6].SetPiece(pawn);
@@ -107,7 +107,7 @@ public class ChessSpawner : MonoBehaviour
         {
             for (int i = 0; i < 8; i++)
             {
-                Pawn pawn = Instantiate(pawnPrefab);
+                Pawn pawn = Instantiate(pawnPrefab, transform);
                 ChessBoard.Instance.squares[i, 1].SetPiece(pawn);
             }
         }
@@ -118,8 +118,8 @@ public class ChessSpawner : MonoBehaviour
         if (isBlack)
         {
 
-            Rook rook1 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 180, 0, 0));
-            Rook rook2 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Rook rook1 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
+            Rook rook2 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
             ChessBoard.Instance.squares[0, 7].SetPiece(rook1);
             ChessBoard.Instance.squares[7, 7].SetPiece(rook2);
 
@@ -127,8 +127,8 @@ public class ChessSpawner : MonoBehaviour
         }
         else
         {
-            Rook rook1 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 0, 0, 0));
-            Rook rook2 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Rook rook1 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
+            Rook rook2 = Instantiate(rookPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
             ChessBoard.Instance.squares[0, 0].SetPiece(rook1);
             ChessBoard.Instance.squares[7, 0].SetPiece(rook2);
         }
@@ -138,8 +138,8 @@ public class ChessSpawner : MonoBehaviour
     {
         if (isBlack)
         {
-            Knight knight1 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 180, 0, 0));
-            Knight knight2 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Knight knight1 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
+            Knight knight2 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
             ChessBoard.Instance.squares[1, 7].SetPiece(knight1);
             ChessBoard.Instance.squares[6, 7].SetPiece(knight2);
 
@@ -147,8 +147,8 @@ public class ChessSpawner : MonoBehaviour
         }
         else
         {
-            Knight knight1 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 0, 0, 0));
-            Knight knight2 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Knight knight1 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
+            Knight knight2 = Instantiate(knightPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
             ChessBoard.Instance.squares[1, 0].SetPiece(knight1);
             ChessBoard.Instance.squares[6, 0].SetPiece(knight2);
         }
@@ -158,8 +158,8 @@ public class ChessSpawner : MonoBehaviour
     {
         if (isBlack)
         {
-            Bishop bishop1 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 180, 0, 0));
-            Bishop bishop2 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            Bishop bishop1 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
+            Bishop bishop2 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
             ChessBoard.Instance.squares[2, 7].SetPiece(bishop1);
             ChessBoard.Instance.squares[5, 7].SetPiece(bishop2);
 
@@ -167,8 +167,8 @@ public class ChessSpawner : MonoBehaviour
         }
         else
         {
-            Bishop bishop1 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 0, 0, 0));
-            Bishop bishop2 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            Bishop bishop1 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
+            Bishop bishop2 = Instantiate(bishopPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
             ChessBoard.Instance.squares[2, 0].SetPiece(bishop1);
             ChessBoard.Instance.squares[5, 0].SetPiece(bishop2);
         }
@@ -178,8 +178,8 @@ public class ChessSpawner : MonoBehaviour
     {
         if (isBlack)
         {
-            King king = Instantiate(kingPrefab, transform.position, new Quaternion(0, 180, 0, 0));
-            Queen queen = Instantiate(queenPrefab, transform.position, new Quaternion(0, 180, 0, 0));
+            King king = Instantiate(kingPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
+            Queen queen = Instantiate(queenPrefab, transform.position, new Quaternion(0, 180, 0, 0), transform);
             ChessBoard.Instance.squares[4, 7].SetPiece(king);
             ChessBoard.Instance.squares[3, 7].SetPiece(queen);
 
@@ -187,8 +187,8 @@ public class ChessSpawner : MonoBehaviour
         }
         else
         {
-            King king = Instantiate(kingPrefab, transform.position, new Quaternion(0, 0, 0, 0));
-            Queen queen = Instantiate(queenPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            King king = Instantiate(kingPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
+            Queen queen = Instantiate(queenPrefab, transform.position, new Quaternion(0, 0, 0, 0), transform);
             ChessBoard.Instance.squares[4, 0].SetPiece(king);
             ChessBoard.Instance.squares[3, 0].SetPiece(queen);
         }

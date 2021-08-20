@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         isBlackTurn = false;
+        
         Piece.OnTurn += ChangeTeam;
         ChessSpawner.OnPiecesLoad += GetChangeAccess;
     }
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     public void GetChangeAccess(bool isChangeble)
     {
+        isBlackTurn = !ChessAI.Instance.isBlackTeam;
         this.isChangeble = isChangeble;
     }
 

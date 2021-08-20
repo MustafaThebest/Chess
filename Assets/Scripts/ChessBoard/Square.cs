@@ -28,8 +28,9 @@ public class Square : MonoBehaviour
         currentPiece = piece;
     }
 
-    public void RemovePiece()
+    public void RemovePiece(Piece piece)
     {
+        piece.OnMove -= RemovePiece;
         currentPiece = null;
     }
 }
