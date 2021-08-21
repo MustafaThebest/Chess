@@ -45,8 +45,10 @@ public class ChessAI : MonoBehaviour
 
             GetMoves(isBlack);
             GetAttackMoves();
+            
             //Random
             SetPiece();
+            
             //Minimax
             //MiniMax(1, isBlackTeam);
         }
