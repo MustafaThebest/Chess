@@ -110,3 +110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSelected: 0
   position: {x: 0, y: 1}
+  isBlack: 0
+  pieceValue: 100
+  turnsCount: 3

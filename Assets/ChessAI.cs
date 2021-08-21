@@ -45,8 +45,10 @@ public class ChessAI : MonoBehaviour
 
             GetMoves(isBlack);
             GetAttackMoves();
+            //Random
             SetPiece();
-            //Search(1, int.MinValue, int.MaxValue);
+            //Minimax
+            //MiniMax(1, isBlackTeam);
         }
     }
 
@@ -59,9 +61,11 @@ public class ChessAI : MonoBehaviour
                 List<Square> squares = item.ShowPath(ChessBoard.Instance.squares);
                 foreach (var square in squares)
                 {
-                    Move move = new Move();
-                    move.piece = item;
-                    move.square = square;
+                    Move move = new Move
+                    {
+                        piece = item,
+                        square = square
+                    };
                     moves.Add(move);
                 }
             }
@@ -79,55 +83,73 @@ public class ChessAI : MonoBehaviour
         }
     }
 
-    public int CountEvaluation()
+    public int GetTeamScore(bool isBlackTeam)
     {
-        int blackEval = 0;
-        int whiteEval = 0;
+        int teamScore = 0;
 
         foreach (var item in FindObjectsOfType<Piece>())
         {
-            if(item.isBlack)
+            if (item.isBlack)
             {
-                blackEval += item.pieceValue;
-            } else
-            {
-                whiteEval += item.pieceValue;
+                teamScore += item.pieceValue;
             }
         }
 
-        int evaluation = whiteEval - blackEval;
-
-        return evaluation;
+        return teamScore;
     }
 
-    public int Search(int depth, int alpha, int beta)
+    public int Evaluate(bool isBlackTeam)
     {
-        if(depth == 0)
+        return GetTeamScore(isBlackTeam) - GetTeamScore(!isBlackTeam);
+    }
+
+    public int MiniMax(int depth, bool isBlackTeam)
+    {
+        if (depth == 0)
         {
-            CountEvaluation();
+            return Evaluate(isBlackTeam);
         }
 
-        if(moves.Count == 0)
-        {
-            return 0;
-        }
+        Move bestMove = moves[UnityEngine.Random.Range(0, moves.Count)];
 
-        foreach (var move in moves)
+        if (isBlackTeam)
         {
-            Vector2 lastSquare = move.piece.position;
-            move.square.SetPiece(move.piece);
-            int evaluation = -Search(depth - 1, -alpha, -beta);
-            ChessBoard.Instance.squares[(int)lastSquare.x, (int)lastSquare.y].SetPiece(move.piece);
-            if(evaluation >= beta)
+            int max_eval = int.MinValue;
+            foreach (var move in moves)
             {
-                return beta;
+                Vector2 lastSquare = move.piece.position;
+                move.square.SetPiece(move.piece);
+
+                int current_evaluation = MiniMax(depth - 1, !isBlackTeam);
+                ChessBoard.Instance.squares[(int)lastSquare.x, (int)lastSquare.y].SetPiece(move.piece);
+
+                if (current_evaluation > max_eval)
+                {
+                    max_eval = current_evaluation;
+                    bestMove = move;
+                }
             }
-
-            alpha = Math.Max(alpha, evaluation);
-
+            return max_eval;
         }
+        else
+        {
+            int min_eval = int.MaxValue;
+            foreach (var move in moves)
+            {
+                Vector2 lastSquare = move.piece.position;
+                move.square.SetPiece(move.piece);
 
-        return alpha;
+                int current_evaluation = MiniMax(depth - 1, isBlackTeam);
+                ChessBoard.Instance.squares[(int)lastSquare.x, (int)lastSquare.y].SetPiece(move.piece);
+
+                if (current_evaluation < min_eval)
+                {
+                    min_eval = current_evaluation;
+                    bestMove = move;
+                }
+            }
+            return min_eval;
+        }
     }
 
     public void SetPiece()

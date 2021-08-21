@@ -110,3 +110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSelected: 0
   position: {x: 3, y: 0}
+  isBlack: 0
+  pieceValue: 500

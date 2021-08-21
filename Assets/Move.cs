@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Move : ScriptableObject
 {
-    public Piece piece;
-    public Square square;
+    public Piece piece { get; set; }
+    public Square square { get; set; }
 }
