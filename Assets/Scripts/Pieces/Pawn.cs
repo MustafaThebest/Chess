@@ -25,7 +25,6 @@ public class Pawn : Piece
                     Square square = GetSquareInfo(0, i, squares);
                     if (square != null)
                     {
-
                         if (square.currentPiece != null)
                         {
                             break;
